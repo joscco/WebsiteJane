@@ -22,8 +22,10 @@ import { RevealDirective } from '../../directives/reveal.directive';
           @for (card of cards; track card.title; let i = $index) {
             <div class="bg-white rounded-2xl p-8 shadow-sm border border-border flex flex-col gap-4" appReveal
                  [style.transition-delay]="i * 100 + 'ms'">
-              <div class="w-12 h-12 rounded-full flex items-center justify-center text-2xl shrink-0"
-                   [class]="card.iconBg" aria-hidden="true">{{ card.icon }}</div>
+              <div class="w-12 h-12 rounded-full flex items-center justify-center shrink-0"
+                   [class]="card.iconBg" aria-hidden="true">
+                <img [src]="card.icon" alt="" class="w-7 h-7"/>
+              </div>
               <h3 class="font-serif font-semibold text-brown text-lg">{{ card.title }}</h3>
               @for (p of card.paragraphs; track p) {
                 <p class="text-brown-muted text-sm leading-relaxed" [innerHTML]="p"></p>
@@ -46,7 +48,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
 export class KonzeptComponent {
   cards = [
     {
-      icon: '✍️',
+      icon: '/img/icon-writing.svg',
       iconBg: 'bg-sage-light',
       title: 'Was ist „heilendes Schreiben"?',
       paragraphs: [
@@ -55,7 +57,7 @@ export class KonzeptComponent {
       ],
     },
     {
-      icon: '📔',
+      icon: '/img/icon-diary.svg',
       iconBg: 'bg-terra-light',
       title: 'Kein Tagebuch. Keine Therapie.',
       paragraphs: [
@@ -64,7 +66,7 @@ export class KonzeptComponent {
       ],
     },
     {
-      icon: '🔑',
+      icon: '/img/icon-key.svg',
       iconBg: 'bg-[#f0eaf8]',
       title: 'Verarbeitung. Struktur. Selbstwirksamkeit.',
       paragraphs: [
@@ -73,4 +75,3 @@ export class KonzeptComponent {
     },
   ];
 }
-

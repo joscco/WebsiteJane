@@ -15,8 +15,9 @@ build/
 # Tailwind / PostCSS cache
 .tailwindcss-cache/
 
-# Generated CSS (built from input.css)
+# Generated CSS (built from input.css / css/input.css)
 css/style.css
+src/styles.css
 
 # IDE – JetBrains
 .idea/
