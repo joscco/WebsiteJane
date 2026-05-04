@@ -43,3 +43,4 @@ yarn-error.log*
 # Optional: lock files (remove these lines if you want to commit them)
 # package-lock.json
 # yarn.lock
+/.angular

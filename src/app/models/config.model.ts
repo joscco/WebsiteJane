@@ -1,0 +1,7 @@
+export const APP_CONFIG = {
+  SHEET_ID: 'DEINE_SPREADSHEET_ID',
+  SHEET_GALERIE: 'Galerie',
+  SHEET_IMPULSE: 'Impulse',
+  FORM_ENDPOINT: 'DEIN_APPS_SCRIPT_URL',
+} as const;
+

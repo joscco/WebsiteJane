@@ -1,10 +1,11 @@
 @import "tailwindcss";
 
-/* Tailwind soll auch dynamische Klassen aus JS-Dateien erkennen */
-@source "../js/app.js";
+/* Tailwind scannt alle Angular-Komponenten-Templates */
+@source "../src/**/*.ts";
+@source "../src/**/*.html";
 
 /* ============================================================
-   Design-Tokens – Worte die Tragen
+   Design-Tokens – Jane Spiekermann
    Tailwind v4 CSS-first Konfiguration
    ============================================================ */
 @theme {
@@ -63,4 +64,3 @@ h1, h2, h3, h4 {
   opacity: 1;
   transform: none;
 }
-
