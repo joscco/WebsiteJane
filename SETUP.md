@@ -34,7 +34,7 @@ Danach pflegst du **alles nur noch im Google Sheet** – kein Code mehr anfassen
    |---|---|---|---|---|
    | Titel | Beschreibung | Kategorie | Tag | Heute |
 
-6. Erstelle einen dritten Tab: **`Einreichungen`** – leer lassen (wird automatisch befüllt)
+6. Erstelle einen dritten Tab: **`Einreichungen`** – leer lassen (wird automatisch befüllt, Spalten: Datum, Name, Email, Kategorie, Titel, Beschreibung, Text, Tags, Status)
 
 ---
 
@@ -143,7 +143,7 @@ npm run css:build
 ### 📬 Einreichungen sichten
 
 1. Öffne das Google Sheet → Tab **`Einreichungen`**
-2. Du siehst alle eingereichten Werke mit Datum, E-Mail, Text und Bild-Link
+2. Du siehst alle eingereichten Werke mit Datum, E-Mail, Text und Tags
 3. Wenn du ein Werk veröffentlichen möchtest:
    → Kopiere die Zeile in den **`Galerie`**-Tab
    → Ändere den Status in `Galerie` auf `veröffentlicht`

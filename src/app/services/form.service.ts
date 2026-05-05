@@ -7,7 +7,7 @@ export interface FormData {
   kategorie: string;
   titel: string;
   beschreibung: string;
-  bild: string;
+  text: string;
   tags: string;
 }
 

@@ -146,10 +146,11 @@ export class MitmachenComponent {
       return;
     }
     this.submitting.set(true);
+    const name = this.form.value.name!;
     try {
       await this.formService.submit(this.form.value as any);
       this.form.reset();
-      this.setStatus('success', `Danke, ${this.form.value.name}! ✦ Deine Einreichung ist angekommen.`);
+      this.setStatus('success', `Danke, ${name}! ✦ Deine Einreichung ist angekommen.`);
       setTimeout(() => this.statusMsg.set(null), 8000);
     } catch {
       this.setStatus('error', 'Beim Senden ist ein Fehler aufgetreten. Bitte versuch es erneut.');

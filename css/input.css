@@ -1,15 +1,9 @@
 @import "tailwindcss";
 
-/* Tailwind scannt alle Angular-Komponenten-Templates */
 @source "../src/**/*.ts";
 @source "../src/**/*.html";
 
-/* ============================================================
-   Design-Tokens – Jane Spiekermann
-   Tailwind v4 CSS-first Konfiguration
-   ============================================================ */
 @theme {
-  /* Farben */
   --color-cream:        #faf6f0;
   --color-cream-dark:   #f0e8de;
   --color-cream-deep:   #e8ddd2;
@@ -24,18 +18,11 @@
   --color-brown-mid:    #5c3d20;
   --color-brown-muted:  #7a6855;
   --color-border:       #e4d8cc;
-
-  /* Schriften */
   --font-serif: "Playfair Display", Georgia, serif;
   --font-sans:  "Nunito", system-ui, sans-serif;
-
-  /* Radien */
   --radius-pill: 999px;
 }
 
-/* ============================================================
-   Basis
-   ============================================================ */
 html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
@@ -48,13 +35,6 @@ h1, h2, h3, h4 {
   line-height: 1.25;
 }
 
-/* Aktiver Nav-Link */
-.nav-link-active {
-  background-color: var(--color-sage-light);
-  color: var(--color-sage-dark);
-}
-
-/* Scroll-Reveal */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -63,4 +43,9 @@ h1, h2, h3, h4 {
 .reveal.visible {
   opacity: 1;
   transform: none;
+}
+
+.nav-link-active {
+  background-color: var(--color-sage-light);
+  color: var(--color-sage-dark);
 }

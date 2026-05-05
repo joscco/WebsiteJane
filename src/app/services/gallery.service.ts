@@ -37,7 +37,7 @@ export class GalleryService {
         return item as GalleryItem;
       })
       .filter((item: GalleryItem) =>
-        String(item.Status).trim().toLowerCase() === 'veröffentlicht'
+        String(item.Anzeigen).trim().toLowerCase() === 'ja'
       );
   }
 }

@@ -20,9 +20,9 @@
  */
 
 // ─── Konfiguration ───────────────────────────────────────────────
-const SPREADSHEET_ID = 'DEINE_SPREADSHEET_ID';  // Aus der Sheet-URL
+const SPREADSHEET_ID = '11axdFevTmadj7shaRTSKn-U3NnM3JE8TuUTopjmtDBo';  // Aus der Sheet-URL
 const EINREICHUNGEN_TAB = 'Einreichungen';       // Tabellenblatt-Name
-const JANE_EMAIL = 'hallo@funken-projekt.de';    // Janes E-Mail-Adresse
+const JANE_EMAIL = 'jomitz96@hotmail.com';    // Janes E-Mail-Adresse
 
 // ─── Haupt-Handler: Einreichung entgegennehmen ───────────────────
 function doPost(e) {
@@ -34,23 +34,23 @@ function doPost(e) {
     const sheet = ss.getSheetByName(EINREICHUNGEN_TAB)
                  || ss.insertSheet(EINREICHUNGEN_TAB);
 
-    // Kopfzeile anlegen, falls das Sheet neu ist
+// Kopfzeile anlegen, falls das Sheet neu ist
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['Datum', 'Name', 'Email', 'Kategorie', 'Titel',
-                       'Beschreibung', 'Bild', 'Tags', 'Status']);
+      sheet.appendRow(['Email', 'Datum', 'Name', 'Kategorie', 'Titel',
+                       'Text', 'Beschreibung', 'Tags', 'Status']);
       sheet.getRange(1, 1, 1, 9).setFontWeight('bold');
     }
 
     // Datensatz einfügen (Status "eingereicht" → Admin ändert auf "veröffentlicht")
     sheet.appendRow([
+      data.email        || '',
       new Date(),
-      data.name        || '',
-      data.email       || '',
-      data.kategorie   || '',
-      data.titel       || '',
-      data.beschreibung|| '',
-      data.bild        || '',
-      data.tags        || '',
+      data.name         || '',
+      data.kategorie    || '',
+      data.titel        || '',
+      data.text         || '',
+      data.beschreibung || '',
+      data.tags         || '',
       'eingereicht',
     ]);
 
@@ -103,7 +103,7 @@ function doPost(e) {
               <tr><td style="padding: 6px 12px; background: #f0e8de; font-weight: bold;">Kategorie</td><td style="padding: 6px 12px;">${data.kategorie}</td></tr>
               <tr><td style="padding: 6px 12px; font-weight: bold;">Titel</td>     <td style="padding: 6px 12px;"><strong>${data.titel}</strong></td></tr>
               <tr><td style="padding: 6px 12px; background: #f0e8de; font-weight: bold;">Beschreibung</td><td style="padding: 6px 12px;">${data.beschreibung}</td></tr>
-              <tr><td style="padding: 6px 12px; font-weight: bold;">Bild-URL</td>  <td style="padding: 6px 12px;"><a href="${data.bild}">${data.bild || '–'}</a></td></tr>
+              <tr><td style="padding: 6px 12px; font-weight: bold;">Text</td><td style="padding: 6px 12px;">${data.text ? (data.text.length > 200 ? data.text.substring(0, 200) + '…' : data.text) : '–'}</td></tr>
             </table>
             <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #7a6855;">
               → Öffne das
@@ -135,4 +135,3 @@ function doGet(e) {
     .createTextOutput('✦ Funken Apps Script läuft.')
     .setMimeType(ContentService.MimeType.TEXT);
 }
-
