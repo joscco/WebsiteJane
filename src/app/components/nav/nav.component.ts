@@ -66,14 +66,15 @@ export class NavComponent {
   menuOpen = signal(false);
   scrolled = signal(false);
 
-  navLinks = [
-    { path: '/konzept',      label: 'Konzept',      cta: false },
-    { path: '/fuer-wen',     label: 'Für wen?',     cta: false },
-    { path: '/wirkung',      label: 'Wirkung',      cta: false },
-    { path: '/schreibraeume',label: 'Schreibräume', cta: false },
-    { path: '/angebote',     label: 'Angebote',     cta: false },
-    { path: '/ueber-mich',   label: 'Über mich',    cta: false },
-    { path: '/kontakt',      label: 'Kontakt',      cta: true  },
+navLinks = [
+    { path: '/konzept',       label: 'Konzept',       cta: false },
+    { path: '/fuer-wen',      label: 'Für wen?',      cta: false },
+    { path: '/wirkung',       label: 'Wirkung',       cta: false },
+    { path: '/schreibraeume', label: 'Schreibräume',  cta: false },
+    { path: '/impulse',       label: 'Impulse',       cta: false },
+    { path: '/angebote',      label: 'Angebote',      cta: false },
+    { path: '/ueber-mich',    label: 'Über mich',     cta: false },
+    { path: '/kontakt',       label: 'Kontakt',        cta: true  },
   ];
 
   toggleMenu(): void { this.menuOpen.update(v => !v); }

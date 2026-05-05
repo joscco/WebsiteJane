@@ -30,11 +30,11 @@ Danach pflegst du **alles nur noch im Google Sheet** – kein Code mehr anfassen
 
 5. Erstelle einen zweiten Tab: **`Impulse`** (Zeile 1 wie folgt)
 
-   | A | B | C | D | E |
-   |---|---|---|---|---|
-   | Titel | Beschreibung | Kategorie | Tag | Heute |
+   | A | B | C | D |
+   |---|---|---|---|
+   | Titel | Beschreibung | Kategorie | Tag |
 
-6. Erstelle einen dritten Tab: **`Einreichungen`** – leer lassen (wird automatisch befüllt, Spalten: Datum, Name, Email, Kategorie, Titel, Beschreibung, Text, Tags, Status)
+6. Erstelle einen dritten Tab: **`Einreichungen`** – leer lassen (wird automatisch befüllt, Spalten: Email, Datum, Name, Kategorie, Titel, Text, Beschreibung, Tags, Status)
 
 ---
 
@@ -130,20 +130,19 @@ npm run css:build
 
 | Spalte | Was reinschreiben | Beispiel |
 |---|---|---|
-| Titel | Kurzer Titel des Impulses | Mein Morgengedanke |
-| Beschreibung | Aufgabe (2–3 Sätze) | Schreib drei Sätze über das, was du dir heute wünschst … |
-| Kategorie | Genau einer: `Schreiben`, `Malen`, `Fotografie`, `Musik`, `Basteln`, `Bewegung` | Schreiben |
-| Tag | Stimmungs-Label | Hoffnung |
-| Heute | `ja` für den Impuls des Tages (max. 1 pro Kategorie) | ja |
+| Titel | Kurzer Titel des Impulses | Brief ans zukünftige Ich |
+| Beschreibung | Aufgabe (2–3 Sätze) | Schreib dir selbst einen Brief – von jemandem, der schon weiß, dass alles gut wird … |
+| Kategorie | Genau einer: `Brief`, `Tagebuch`, `Poesie`, `Biografie`, `Freies Schreiben` | Brief |
+| Tag | Stimmungs-Label | Ermutigung |
 
-> 💡 **Tipp:** Den „Impuls des Tages" wechselst du, indem du die `ja`-Einträge anpasst. Der bisherige bekommt wieder eine leere Zelle oder `nein`.
+> 💡 **Tipp:** Der „Impuls des Tages" rotiert automatisch – pro Kategorie wird jeden Tag ein anderer Impuls markiert. Du musst nichts manuell einstellen.
 
 ---
 
 ### 📬 Einreichungen sichten
 
 1. Öffne das Google Sheet → Tab **`Einreichungen`**
-2. Du siehst alle eingereichten Werke mit Datum, E-Mail, Text und Tags
+2. Du siehst alle eingereichten Werke mit E-Mail, Datum, Text und Tags
 3. Wenn du ein Werk veröffentlichen möchtest:
    → Kopiere die Zeile in den **`Galerie`**-Tab
    → Ändere den Status in `Galerie` auf `veröffentlicht`
@@ -163,5 +162,5 @@ A: Prüfe, ob `FORM_ENDPOINT` die richtige Apps Script URL enthält. Teste die U
 A: Das Apps Script muss Zugriff auf Gmail haben. Beim ersten Ausführen erscheint ein Berechtigungsdialog – diesen bestätigen.
 
 **F: Ich sehe meine neuen Impulse nicht auf der Seite.**
-A: Stelle sicher, dass der Spaltenname `Kategorie` exakt so geschrieben ist (Groß-/Kleinschreibung!), und dass der Kategorie-Wert exakt einem der 6 Werte entspricht.
+A: Stelle sicher, dass der Spaltenname `Kategorie` exakt so geschrieben ist, und dass der Kategorie-Wert exakt einem der 5 Werte entspricht: `Brief`, `Tagebuch`, `Poesie`, `Biografie`, `Freies Schreiben`.
 
