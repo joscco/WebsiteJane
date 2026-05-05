@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { RevealDirective } from '../../directives/reveal.directive';
 import { FormService } from '../../services/form.service';
 
@@ -9,6 +9,16 @@ type StatusType = 'success' | 'error' | 'warn' | null;
   selector: 'app-mitmachen',
   standalone: true,
   imports: [ReactiveFormsModule, RevealDirective],
+  styles: [`
+    .field-error input, .field-error select, .field-error textarea {
+      border-color: #c06060 !important;
+      background-color: #fdf0f0 !important;
+    }
+    .field-error input:focus, .field-error select:focus, .field-error textarea:focus {
+      border-color: #a04040 !important;
+      --tw-ring-color: rgba(160, 64, 64, 0.2) !important;
+    }
+  `],
   template: `
     <section id="mitmachen" class="py-24 bg-cream">
       <div class="max-w-5xl mx-auto px-6">
@@ -31,22 +41,30 @@ type StatusType = 'success' | 'error' | 'warn' | null;
 
           <form class="p-8" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
-              <div>
+              <div [class.field-error]="isInvalid('name')">
                 <label for="f-name" class="block text-xs font-bold text-brown mb-1.5">Name oder Pseudonym *</label>
                 <input id="f-name" formControlName="name" type="text" autocomplete="name"
                        placeholder="Wie darf ich dich nennen?"
                        class="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-cream focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all">
+                @if (isInvalid('name')) {
+                  <p class="text-xs text-[#a04040] mt-1">Bitte gib einen Namen an.</p>
+                }
               </div>
-              <div>
+              <div [class.field-error]="isInvalid('email')">
                 <label for="f-email" class="block text-xs font-bold text-brown mb-1.5">E-Mail * <span class="font-normal text-brown-muted">(für Rückmeldung)</span></label>
                 <input id="f-email" formControlName="email" type="email" autocomplete="email"
                        placeholder="deine@email.de"
                        class="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-cream focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all">
+                @if (hasError('email', 'required')) {
+                  <p class="text-xs text-[#a04040] mt-1">Bitte gib deine E-Mail an.</p>
+                } @else if (hasError('email', 'email')) {
+                  <p class="text-xs text-[#a04040] mt-1">Das sieht nicht wie eine E-Mail aus.</p>
+                }
               </div>
             </div>
 
             <div class="grid sm:grid-cols-2 gap-4 mb-4">
-              <div>
+              <div [class.field-error]="isInvalid('kategorie')">
                 <label for="f-kategorie" class="block text-xs font-bold text-brown mb-1.5">Textform *</label>
                 <select id="f-kategorie" formControlName="kategorie"
                         class="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-cream focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all">
@@ -55,31 +73,43 @@ type StatusType = 'success' | 'error' | 'warn' | null;
                     <option [value]="k">{{ k }}</option>
                   }
                 </select>
+                @if (isInvalid('kategorie')) {
+                  <p class="text-xs text-[#a04040] mt-1">Bitte wähle eine Textform.</p>
+                }
               </div>
-              <div>
+              <div [class.field-error]="isInvalid('titel')">
                 <label for="f-titel" class="block text-xs font-bold text-brown mb-1.5">Titel *</label>
                 <input id="f-titel" formControlName="titel" type="text"
                        placeholder="Wie heißt dein Text?"
                        class="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-cream focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all">
+                @if (isInvalid('titel')) {
+                  <p class="text-xs text-[#a04040] mt-1">Bitte gib einen Titel an.</p>
+                }
               </div>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4" [class.field-error]="isInvalid('beschreibung')">
               <label for="f-beschreibung" class="block text-xs font-bold text-brown mb-1.5">
                 Kurzbeschreibung oder Kontext * <span class="font-normal text-brown-muted">(erscheint in den Schreibräumen)</span>
               </label>
               <textarea id="f-beschreibung" formControlName="beschreibung" rows="3"
                         placeholder="Wie ist der Text entstanden? Was steckt dahinter?"
                         class="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-cream focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all resize-none"></textarea>
+              @if (isInvalid('beschreibung')) {
+                <p class="text-xs text-[#a04040] mt-1">Bitte gib eine Kurzbeschreibung an.</p>
+              }
             </div>
 
-            <div class="mb-4">
+            <div class="mb-4" [class.field-error]="isInvalid('text')">
               <label for="f-text" class="block text-xs font-bold text-brown mb-1.5">
                 Dein Text * <span class="font-normal text-brown-muted">(wird auf der Website veröffentlicht)</span>
               </label>
               <textarea id="f-text" formControlName="text" rows="10"
                         placeholder="Schreib oder füge deinen Text hier ein …"
                         class="w-full px-4 py-2.5 border border-border rounded-xl text-sm bg-cream focus:outline-none focus:border-sage focus:ring-2 focus:ring-sage/20 transition-all resize-y"></textarea>
+              @if (isInvalid('text')) {
+                <p class="text-xs text-[#a04040] mt-1">Bitte gib deinen Text ein.</p>
+              }
             </div>
 
             <div class="mb-6">
@@ -114,6 +144,7 @@ export class MitmachenComponent {
   submitting = signal(false);
   statusMsg = signal<string | null>(null);
   statusType = signal<StatusType>(null);
+  submitted = signal(false);
 
   kategorien = ['Poesie', 'Biografie', 'Briefe', 'Prosa', 'Sonstiges'];
 
@@ -127,6 +158,16 @@ export class MitmachenComponent {
     tags:         [''],
   });
 
+  isInvalid(fieldName: string): boolean {
+    const ctrl = this.form.get(fieldName);
+    return !!(this.submitted() && ctrl && ctrl.invalid);
+  }
+
+  hasError(fieldName: string, errorCode: string): boolean {
+    const ctrl = this.form.get(fieldName);
+    return !!(this.submitted() && ctrl && ctrl.hasError(errorCode));
+  }
+
   statusClass(): string {
     const map: Record<string, string> = {
       success: 'bg-sage-light border border-sage text-sage-dark',
@@ -137,6 +178,7 @@ export class MitmachenComponent {
   }
 
   async onSubmit(): Promise<void> {
+    this.submitted.set(true);
     if (this.form.invalid) {
       this.setStatus('error', 'Bitte füll alle Pflichtfelder aus (*).');
       return;
@@ -150,6 +192,7 @@ export class MitmachenComponent {
     try {
       await this.formService.submit(this.form.value as any);
       this.form.reset();
+      this.submitted.set(false);
       this.setStatus('success', `Danke, ${name}! ✦ Deine Einreichung ist angekommen.`);
       setTimeout(() => this.statusMsg.set(null), 8000);
     } catch {
